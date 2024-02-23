@@ -97,6 +97,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.BASE;
     case 84531:
       return ChainId.BASE_GOERLI;
+    case 1261120:
+      return ChainId.ZKATANA;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -122,6 +124,7 @@ export enum ChainName {
   AVALANCHE = 'avalanche-mainnet',
   BASE = 'base-mainnet',
   BASE_GOERLI = 'base-goerli',
+  ZKATANA = 'zkatana',
 }
 
 export enum NativeCurrencyName {
@@ -264,6 +267,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.BASE;
     case 84531:
       return ChainName.BASE_GOERLI;
+    case 1261120:
+      return ChainName.ZKATANA;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -448,6 +453,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     'WETH',
     'Wrapped Ether'
   ),
+  [ChainId.ZKATANA]: new Token(
+    ChainId.ZKATANA,
+    '0xd2480162Aa7F02Ead7BF4C127465446150D58452',
+    18,
+    "WETH",
+    "Wrapped Ether"
+  )
 };
 
 function isMatic(

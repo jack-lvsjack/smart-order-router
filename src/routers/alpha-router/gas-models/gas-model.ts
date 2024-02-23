@@ -18,9 +18,10 @@ import {
   DAI_MAINNET,
   DAI_OPTIMISM,
   DAI_OPTIMISM_GOERLI,
-  DAI_OPTIMISM_SEPOLIA,
+  // DAI_OPTIMISM_SEPOLIA,
   DAI_POLYGON_MUMBAI,
   DAI_SEPOLIA,
+  DAI_ZKATANA,
   USDC_ARBITRUM,
   USDC_ARBITRUM_GOERLI,
   USDC_ARBITRUM_SEPOLIA,
@@ -41,7 +42,7 @@ import {
   USDC_NATIVE_POLYGON,
   USDC_OPTIMISM,
   USDC_OPTIMISM_GOERLI,
-  USDC_OPTIMISM_SEPOLIA,
+  // USDC_OPTIMISM_SEPOLIA,
   USDC_POLYGON,
   USDC_SEPOLIA,
   USDC_WORMHOLE_CELO,
@@ -51,7 +52,7 @@ import {
   USDT_MAINNET,
   USDT_OPTIMISM,
   USDT_OPTIMISM_GOERLI,
-  USDT_OPTIMISM_SEPOLIA,
+  // USDT_OPTIMISM_SEPOLIA,
   WBTC_GOERLI,
 } from '../../../providers/token-provider';
 import { IV2PoolProvider } from '../../../providers/v2/pool-provider';
@@ -92,9 +93,9 @@ export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
     USDT_OPTIMISM_GOERLI,
   ],
   [ChainId.OPTIMISM_SEPOLIA]: [
-    DAI_OPTIMISM_SEPOLIA,
-    USDC_OPTIMISM_SEPOLIA,
-    USDT_OPTIMISM_SEPOLIA,
+    // DAI_OPTIMISM_SEPOLIA,
+    // USDC_OPTIMISM_SEPOLIA,
+    // USDT_OPTIMISM_SEPOLIA,
   ],
   [ChainId.ARBITRUM_GOERLI]: [USDC_ARBITRUM_GOERLI],
   [ChainId.ARBITRUM_SEPOLIA]: [USDC_ARBITRUM_SEPOLIA],
@@ -114,6 +115,7 @@ export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
     USDC_BRIDGED_AVAX,
   ],
   [ChainId.BASE]: [USDC_BASE, USDC_NATIVE_BASE],
+  [ChainId.ZKATANA]: [DAI_ZKATANA],
 };
 
 export type L1ToL2GasCosts = {

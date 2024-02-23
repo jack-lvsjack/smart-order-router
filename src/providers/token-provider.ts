@@ -647,6 +647,38 @@ export const WBTC_MOONBEAM = new Token(
   'Wrapped BTC bridged using Multichain'
 );
 
+export const DAI_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0xc121c0f2104cb98ef5de1135e757d9dae546136a',
+  18,
+  'DAI',
+  'Dai on zKatana'
+);
+
+export const USDT_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0x078904a7A7eE26Efd0708269C8Bc07D88F20E3D5',
+  18,
+  'USDT',
+  'USDT on zKatana'
+);
+
+export const USDC_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0xe245C9F377876222e42Bd3f1936b86F2C97D2c9d',
+  18,
+  'USDC',
+  'USDC on zKatana'
+);
+
+export const WETH_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0xd2480162Aa7F02Ead7BF4C127465446150D58452',
+  18,
+  'WETH',
+  'WETH on zKatana'
+);
+
 export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,
@@ -830,8 +862,8 @@ export const DAI_ON = (chainId: ChainId): Token => {
       return DAI_OPTIMISM;
     case ChainId.OPTIMISM_GOERLI:
       return DAI_OPTIMISM_GOERLI;
-    case ChainId.OPTIMISM_SEPOLIA:
-      return DAI_OPTIMISM_SEPOLIA;
+    // case ChainId.OPTIMISM_SEPOLIA:
+    //   return DAI_OPTIMISM_SEPOLIA;
     case ChainId.ARBITRUM_ONE:
       return DAI_ARBITRUM;
     case ChainId.ARBITRUM_GOERLI:
