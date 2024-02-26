@@ -243,7 +243,6 @@ export function getL2ToL1GasUsed(
   chainId: ChainId
 ): BigNumber {
   switch (chainId) {
-    // comment the getArbitrumBytes to avoid brotli package error
     // case ChainId.ARBITRUM_ONE:
     // case ChainId.ARBITRUM_GOERLI: {
     //   // calculates bytes of compressed calldata
