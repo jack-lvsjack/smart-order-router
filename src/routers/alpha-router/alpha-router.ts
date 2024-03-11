@@ -1,14 +1,14 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider, JsonRpcProvider } from '@ethersproject/providers';
-import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list';
-import { Protocol, SwapRouter, Trade, ZERO } from '@uniswap/router-sdk';
 import {
   ChainId,
   Currency,
   Fraction,
   Token,
   TradeType,
-} from '@uniswap/sdk-core';
+} from '@lvsjack/sdk-core';
+import DEFAULT_TOKEN_LIST from '@uniswap/default-token-list';
+import { Protocol, SwapRouter, Trade, ZERO } from '@uniswap/router-sdk';
 import { TokenList } from '@uniswap/token-lists';
 import { Pool, Position, SqrtPriceMath, TickMath } from '@uniswap/v3-sdk';
 import retry from 'async-retry';
@@ -631,6 +631,32 @@ export class AlphaRouter
             },
             {
               gasLimitOverride: 6_250_000,
+              multicallChunk: 4,
+            }
+          );
+          break;
+        case ChainId.ZKATANA:
+        case ChainId.ZKEVM:
+          this.onChainQuoteProvider = new OnChainQuoteProvider(
+            chainId,
+            provider,
+            this.multicall2Provider,
+            {
+              retries: 2,
+              minTimeout: 100,
+              maxTimeout: 1000,
+            },
+            {
+              multicallChunk: 10,
+              gasLimitPerCall: 5_000_000,
+              quoteMinSuccessRate: 0.1,
+            },
+            {
+              gasLimitOverride: 5_000_000,
+              multicallChunk: 5,
+            },
+            {
+              gasLimitOverride: 5_000_000,
               multicallChunk: 4,
             }
           );
@@ -2083,14 +2109,16 @@ export class AlphaRouter
     };
 
     const v2GasModelPromise = this.v2Supported?.includes(this.chainId)
-      ? this.v2GasModelFactory.buildGasModel({
-          chainId: this.chainId,
-          gasPriceWei,
-          poolProvider: this.v2PoolProvider,
-          token: quoteToken,
-          l2GasDataProvider: this.l2GasDataProvider,
-          providerConfig: providerConfig,
-        })
+      ? this.v2GasModelFactory
+          .buildGasModel({
+            chainId: this.chainId,
+            gasPriceWei,
+            poolProvider: this.v2PoolProvider,
+            token: quoteToken,
+            l2GasDataProvider: this.l2GasDataProvider,
+            providerConfig: providerConfig,
+          })
+          .catch((_) => undefined) // If v2 model throws uncaught exception, we return undefined v2 gas model, so there's a chance v3 route can go through
       : Promise.resolve(undefined);
 
     const v3GasModelPromise = this.v3GasModelFactory.buildGasModel({

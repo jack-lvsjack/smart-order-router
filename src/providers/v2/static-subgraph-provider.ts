@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { ChainId, Token } from '@lvsjack/sdk-core';
 import { Pair } from '@uniswap/v2-sdk';
 import _ from 'lodash';
 
@@ -29,6 +29,8 @@ import {
   USDC_NATIVE_ARBITRUM,
   USDC_OPTIMISM,
   USDC_POLYGON,
+  USDC_ZKATANA,
+  USDC_ZKEVM,
   USDT_ARBITRUM,
   USDT_BNB,
   USDT_MAINNET,
@@ -106,7 +108,8 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ],
   [ChainId.BASE_GOERLI]: [],
   [ChainId.BASE]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE], USDC_BASE],
-  [ChainId.ZKATANA]: [],
+  [ChainId.ZKATANA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKATANA], USDC_ZKATANA],
+  [ChainId.ZKEVM]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKEVM], USDC_ZKEVM],
 };
 
 /**

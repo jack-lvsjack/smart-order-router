@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { ChainId, Token } from '@lvsjack/sdk-core';
 
 import {
   BTC_BNB,
@@ -7,16 +7,15 @@ import {
   DAI_AVAX,
   DAI_BNB,
   DAI_MAINNET,
-  DAI_ZKATANA,
   ITokenProvider,
   USDC_AVAX,
   USDC_BASE,
   USDC_BNB,
   USDC_MAINNET,
   USDC_ZKATANA,
+  USDC_ZKEVM,
   USDT_BNB,
   USDT_MAINNET,
-  USDT_ZKATANA,
   WBTC_MAINNET,
   WMATIC_POLYGON,
   WMATIC_POLYGON_MUMBAI,
@@ -75,12 +74,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST = (
     ],
     [ChainId.BASE]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE]!, USDC_BASE],
     [ChainId.BASE_GOERLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE_GOERLI]!],
-    [ChainId.ZKATANA]: [
-      WRAPPED_NATIVE_CURRENCY[ChainId.ZKATANA],
-      DAI_ZKATANA,
-      USDT_ZKATANA,
-      USDC_ZKATANA
-    ]
+    [ChainId.ZKATANA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKATANA], USDC_ZKATANA],
+    [ChainId.ZKEVM]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKEVM], USDC_ZKEVM],
   };
 };
 

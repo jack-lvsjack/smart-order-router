@@ -1,7 +1,7 @@
 import { Interface } from '@ethersproject/abi';
 import { BigNumber } from '@ethersproject/bignumber';
 import { parseBytes32String } from '@ethersproject/strings';
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { ChainId, Token } from '@lvsjack/sdk-core';
 import _ from 'lodash';
 
 import { IERC20Metadata__factory } from '../types/v3/factories/IERC20Metadata__factory';
@@ -679,6 +679,22 @@ export const WETH_ZKATANA = new Token(
   'WETH on zKatana'
 );
 
+export const USDC_ZKEVM = new Token(
+  ChainId.ZKATANA,
+  '0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035',
+  6,
+  'USDC',
+  'USDC on zkEVM'
+);
+
+export const WETH_ZKEVM = new Token(
+  ChainId.ZKATANA,
+  '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
+  18,
+  'WETH',
+  'WETH on zkEVM'
+);
+
 export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,
@@ -862,8 +878,8 @@ export const DAI_ON = (chainId: ChainId): Token => {
       return DAI_OPTIMISM;
     case ChainId.OPTIMISM_GOERLI:
       return DAI_OPTIMISM_GOERLI;
-    // case ChainId.OPTIMISM_SEPOLIA:
-    //   return DAI_OPTIMISM_SEPOLIA;
+    case ChainId.OPTIMISM_SEPOLIA:
+      return DAI_OPTIMISM_SEPOLIA;
     case ChainId.ARBITRUM_ONE:
       return DAI_ARBITRUM;
     case ChainId.ARBITRUM_GOERLI:
@@ -946,6 +962,10 @@ export const USDC_ON = (chainId: ChainId): Token => {
       return USDC_BASE;
     case ChainId.BASE_GOERLI:
       return USDC_BASE_GOERLI;
+    case ChainId.ZKATANA:
+      return USDC_ZKATANA;
+    case ChainId.ZKEVM:
+      return USDC_ZKEVM;
     default:
       throw new Error(`Chain id: ${chainId} not supported`);
   }

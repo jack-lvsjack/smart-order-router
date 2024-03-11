@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
+import { ChainId, Currency, Token, TradeType } from '@lvsjack/sdk-core';
 import { Protocol } from '@uniswap/router-sdk';
-import { ChainId, Currency, Token, TradeType } from '@uniswap/sdk-core';
 import _ from 'lodash';
 
 import {
@@ -12,6 +12,11 @@ import {
   IV2SubgraphProvider,
   TokenValidationResult,
 } from '../../../providers';
+import {
+  ArbitrumGasData,
+  IL2GasDataProvider,
+  OptimismGasData,
+} from '../../../providers/v3/gas-data-provider';
 import {
   CurrencyAmount,
   log,
@@ -30,11 +35,6 @@ import {
 import { IGasModel, IV2GasModelFactory } from '../gas-models';
 import { NATIVE_OVERHEAD } from '../gas-models/v3/gas-costs';
 
-import {
-  ArbitrumGasData,
-  IL2GasDataProvider,
-  OptimismGasData,
-} from '../../../providers/v3/gas-data-provider';
 import { BaseQuoter } from './base-quoter';
 import { GetQuotesResult } from './model/results/get-quotes-result';
 import { GetRoutesResult } from './model/results/get-routes-result';
