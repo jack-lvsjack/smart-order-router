@@ -190,6 +190,8 @@ export function getGasCostInNativeCurrency(
 }
 
 export function getArbitrumBytes(data: string): BigNumber {
+  // to temporary fix Browser is not defined error
+  return BigNumber.from(0);
   if (data == '') return BigNumber.from(0);
   const compressed = brotli.compress(
     Buffer.from(data.replace('0x', ''), 'hex'),
