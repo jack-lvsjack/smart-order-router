@@ -4,7 +4,7 @@ import {
   Ether,
   NativeCurrency,
   Token,
-} from '@uniswap/sdk-core';
+} from '@lvsjack/sdk-core';
 
 // WIP: Gnosis, Moonbeam
 export const SUPPORTED_CHAINS: ChainId[] = [
@@ -98,6 +98,10 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.BASE;
     case 84531:
       return ChainId.BASE_GOERLI;
+    case 1261120:
+      return ChainId.ZKATANA;
+    case 3776:
+      return ChainId.ZKEVM;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -449,6 +453,20 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     'WETH',
     'Wrapped Ether'
   ),
+  [ChainId.ZKATANA]: new Token(
+    ChainId.ZKATANA,
+    '0xd2480162Aa7F02Ead7BF4C127465446150D58452',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.ZKEVM]: new Token(
+    ChainId.ZKEVM,
+    '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
 };
 
 function isMatic(
@@ -617,6 +635,54 @@ export class ExtendedEther extends Ether {
     );
   }
 }
+
+// function isZKatana(chainId: number): chainId is ChainId.ZKATANA {
+//   return chainId === ChainId.ZKATANA;
+// }
+
+// class ZkatanaNativeCurrency extends NativeCurrency {
+//   equals(other: Currency): boolean {
+//     return other.isNative && other.chainId === this.chainId;
+//   }
+
+//   get wrapped(): Token {
+//     if (!isZKatana(this.chainId)) throw new Error('Not zKatana');
+//     const nativeCurrency = WRAPPED_NATIVE_CURRENCY[this.chainId];
+//     if (nativeCurrency) {
+//       return nativeCurrency;
+//     }
+//     throw new Error(`Does not support this chain ${this.chainId}`);
+//   }
+
+//   public constructor(chainId: number) {
+//     if (!isZKatana(chainId)) throw new Error('Not zKatana');
+//     super(chainId, 18, 'WETH', 'zKatana');
+//   }
+// }
+
+// function isZKevm(chainId: number): chainId is ChainId.ZKEVM {
+//   return chainId === ChainId.ZKEVM;
+// }
+
+// class ZkevmNativeCurrency extends NativeCurrency {
+//   equals(other: Currency): boolean {
+//     return other.isNative && other.chainId === this.chainId;
+//   }
+
+//   get wrapped(): Token {
+//     if (!isZKevm(this.chainId)) throw new Error('Not zKatana');
+//     const nativeCurrency = WRAPPED_NATIVE_CURRENCY[this.chainId];
+//     if (nativeCurrency) {
+//       return nativeCurrency;
+//     }
+//     throw new Error(`Does not support this chain ${this.chainId}`);
+//   }
+
+//   public constructor(chainId: number) {
+//     if (!isZKevm(chainId)) throw new Error('Not zKatana');
+//     super(chainId, 18, 'WETH', 'zKatana');
+//   }
+// }
 
 const cachedNativeCurrency: { [chainId: number]: NativeCurrency } = {};
 

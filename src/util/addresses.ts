@@ -1,4 +1,9 @@
-import { CHAIN_TO_ADDRESSES_MAP, ChainId, SWAP_ROUTER_02_ADDRESSES as SWAP_ROUTER_02_ADDRESSES_HELPER, Token } from '@uniswap/sdk-core';
+import {
+  ChainId,
+  CHAIN_TO_ADDRESSES_MAP,
+  SWAP_ROUTER_02_ADDRESSES as SWAP_ROUTER_02_ADDRESSES_HELPER,
+  Token,
+} from '@lvsjack/sdk-core';
 import { FACTORY_ADDRESS } from '@uniswap/v3-sdk';
 
 import { NETWORKS_WITH_SAME_UNISWAP_ADDRESSES } from './chains';
@@ -33,6 +38,9 @@ export const V3_CORE_FACTORY_ADDRESSES: AddressMap = {
   [ChainId.BASE_GOERLI]:
     CHAIN_TO_ADDRESSES_MAP[ChainId.BASE_GOERLI].v3CoreFactoryAddress,
   [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].v3CoreFactoryAddress,
+  [ChainId.ZKATANA]:
+    CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].v3CoreFactoryAddress,
+  [ChainId.ZKEVM]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].v3CoreFactoryAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
@@ -55,6 +63,8 @@ export const QUOTER_V2_ADDRESSES: AddressMap = {
   [ChainId.BASE_GOERLI]:
     CHAIN_TO_ADDRESSES_MAP[ChainId.BASE_GOERLI].quoterAddress,
   [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].quoterAddress,
+  [ChainId.ZKATANA]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].quoterAddress,
+  [ChainId.ZKEVM]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].quoterAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
@@ -85,11 +95,22 @@ export const UNISWAP_MULTICALL_ADDRESSES: AddressMap = {
   [ChainId.BASE_GOERLI]:
     CHAIN_TO_ADDRESSES_MAP[ChainId.BASE_GOERLI].multicallAddress,
   [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].multicallAddress,
+  [ChainId.ZKATANA]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].multicallAddress,
+  [ChainId.ZKEVM]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].multicallAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
-export const SWAP_ROUTER_02_ADDRESSES= (chainId: number): string => {
-  return SWAP_ROUTER_02_ADDRESSES_HELPER(chainId) ?? '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45';
+export const SWAP_ROUTER_02_ADDRESSES = (chainId: number): string => {
+  if (chainId == ChainId.ZKATANA) {
+    return CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].swapRouter02Address!;
+  }
+  if (chainId == ChainId.ZKEVM) {
+    return CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].swapRouter02Address!;
+  }
+  return (
+    SWAP_ROUTER_02_ADDRESSES_HELPER(chainId) ??
+    '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45'
+  );
 };
 
 export const OVM_GASPRICE_ADDRESS =
@@ -205,6 +226,20 @@ export const WETH9: {
   [ChainId.BASE]: new Token(
     ChainId.BASE,
     '0x4200000000000000000000000000000000000006',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.ZKATANA]: new Token(
+    ChainId.ZKATANA,
+    '0xd2480162Aa7F02Ead7BF4C127465446150D58452',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.ZKEVM]: new Token(
+    ChainId.ZKEVM,
+    '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
     18,
     'WETH',
     'Wrapped Ether'

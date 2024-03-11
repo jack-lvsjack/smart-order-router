@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { ChainId, Token } from '@lvsjack/sdk-core';
 
 import {
   BTC_BNB,
@@ -12,6 +12,8 @@ import {
   USDC_BASE,
   USDC_BNB,
   USDC_MAINNET,
+  USDC_ZKATANA,
+  USDC_ZKEVM,
   USDT_BNB,
   USDT_MAINNET,
   WBTC_MAINNET,
@@ -72,6 +74,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST = (
     ],
     [ChainId.BASE]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE]!, USDC_BASE],
     [ChainId.BASE_GOERLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE_GOERLI]!],
+    [ChainId.ZKATANA]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKATANA], USDC_ZKATANA],
+    [ChainId.ZKEVM]: [WRAPPED_NATIVE_CURRENCY[ChainId.ZKEVM], USDC_ZKEVM],
   };
 };
 

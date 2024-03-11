@@ -1,7 +1,7 @@
 import { Interface } from '@ethersproject/abi';
 import { BigNumber } from '@ethersproject/bignumber';
 import { parseBytes32String } from '@ethersproject/strings';
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { ChainId, Token } from '@lvsjack/sdk-core';
 import _ from 'lodash';
 
 import { IERC20Metadata__factory } from '../types/v3/factories/IERC20Metadata__factory';
@@ -647,6 +647,54 @@ export const WBTC_MOONBEAM = new Token(
   'Wrapped BTC bridged using Multichain'
 );
 
+export const DAI_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0xc121c0f2104cb98ef5de1135e757d9dae546136a',
+  18,
+  'DAI',
+  'Dai on zKatana'
+);
+
+export const USDT_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0x078904a7A7eE26Efd0708269C8Bc07D88F20E3D5',
+  18,
+  'USDT',
+  'USDT on zKatana'
+);
+
+export const USDC_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0xe245C9F377876222e42Bd3f1936b86F2C97D2c9d',
+  18,
+  'USDC',
+  'USDC on zKatana'
+);
+
+export const WETH_ZKATANA = new Token(
+  ChainId.ZKATANA,
+  '0xd2480162Aa7F02Ead7BF4C127465446150D58452',
+  18,
+  'WETH',
+  'WETH on zKatana'
+);
+
+export const USDC_ZKEVM = new Token(
+  ChainId.ZKATANA,
+  '0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035',
+  6,
+  'USDC',
+  'USDC on zkEVM'
+);
+
+export const WETH_ZKEVM = new Token(
+  ChainId.ZKATANA,
+  '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
+  18,
+  'WETH',
+  'WETH on zkEVM'
+);
+
 export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,
@@ -914,6 +962,10 @@ export const USDC_ON = (chainId: ChainId): Token => {
       return USDC_BASE;
     case ChainId.BASE_GOERLI:
       return USDC_BASE_GOERLI;
+    case ChainId.ZKATANA:
+      return USDC_ZKATANA;
+    case ChainId.ZKEVM:
+      return USDC_ZKEVM;
     default:
       throw new Error(`Chain id: ${chainId} not supported`);
   }

@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@uniswap/sdk-core';
+import { ChainId, Token } from '@lvsjack/sdk-core';
 import _ from 'lodash';
 
 import { log, WRAPPED_NATIVE_CURRENCY } from '../util';
@@ -24,6 +24,7 @@ import {
   DAI_OPTIMISM_GOERLI,
   DAI_OPTIMISM_SEPOLIA,
   DAI_POLYGON_MUMBAI,
+  DAI_ZKATANA,
   ETH_BNB,
   ITokenProvider,
   TokenAccessor,
@@ -41,12 +42,15 @@ import {
   USDC_OPTIMISM_SEPOLIA,
   USDC_POLYGON,
   USDC_SEPOLIA,
+  USDC_ZKATANA,
+  USDC_ZKEVM,
   USDT_ARBITRUM,
   USDT_BNB,
   USDT_MAINNET,
   USDT_OPTIMISM,
   USDT_OPTIMISM_GOERLI,
   USDT_OPTIMISM_SEPOLIA,
+  USDT_ZKATANA,
   WBTC_ARBITRUM,
   WBTC_MAINNET,
   WBTC_MOONBEAM,
@@ -159,6 +163,16 @@ export const CACHE_SEED_TOKENS: {
   [ChainId.BASE]: {
     USDC: USDC_BASE,
     WETH: WRAPPED_NATIVE_CURRENCY[ChainId.BASE],
+  },
+  [ChainId.ZKATANA]: {
+    USDC: USDC_ZKATANA,
+    USDT: USDT_ZKATANA,
+    DAI: DAI_ZKATANA,
+    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.ZKATANA],
+  },
+  [ChainId.ZKEVM]: {
+    USDC: USDC_ZKEVM,
+    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.ZKEVM],
   },
   // Currently we do not have providers for Moonbeam mainnet or Gnosis testnet
 };
