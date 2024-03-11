@@ -127,6 +127,8 @@ export enum ChainName {
   AVALANCHE = 'avalanche-mainnet',
   BASE = 'base-mainnet',
   BASE_GOERLI = 'base-goerli',
+  ZKATANA = 'zkatana',
+  ZKEVM = 'astar-zkevm',
 }
 
 export enum NativeCurrencyName {
@@ -269,6 +271,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.BASE;
     case 84531:
       return ChainName.BASE_GOERLI;
+    case 3776:
+      return ChainName.ZKEVM;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
