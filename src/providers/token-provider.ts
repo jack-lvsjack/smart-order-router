@@ -680,7 +680,7 @@ export const WETH_ZKATANA = new Token(
 );
 
 export const USDC_ZKEVM = new Token(
-  ChainId.ZKATANA,
+  ChainId.ZKEVM,
   '0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035',
   6,
   'USDC',
@@ -688,7 +688,7 @@ export const USDC_ZKEVM = new Token(
 );
 
 export const WETH_ZKEVM = new Token(
-  ChainId.ZKATANA,
+  ChainId.ZKEVM,
   '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
   18,
   'WETH',

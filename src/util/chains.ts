@@ -271,6 +271,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.BASE;
     case 84531:
       return ChainName.BASE_GOERLI;
+    case 1261120:
+      return ChainName.ZKATANA;
     case 3776:
       return ChainName.ZKEVM;
     default:
