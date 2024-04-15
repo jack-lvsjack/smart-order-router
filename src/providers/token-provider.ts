@@ -695,6 +695,22 @@ export const WETH_ZKEVM = new Token(
   'WETH on zkEVM'
 );
 
+export const WETH_ZKYOTO = new Token(
+  ChainId.ZKYOTO,
+  '0x2fbc5Ba5927e9dd59C395C1d29235B2fd5f75071',
+  18,
+  'WETH',
+  'WETH on zKyoto'
+);
+
+export const USDC_ZKYOTO = new Token(
+  ChainId.ZKYOTO,
+  '0xAFfE538E9248F92E90ad26b6E5e9a391CB5b8b73',
+  18,
+  'WETH',
+  'USDC on zKyoto'
+);
+
 export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,

@@ -102,6 +102,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.ZKATANA;
     case 3776:
       return ChainId.ZKEVM;
+    case 6038361:
+      return ChainId.ZKYOTO;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -129,6 +131,7 @@ export enum ChainName {
   BASE_GOERLI = 'base-goerli',
   ZKATANA = 'zkatana',
   ZKEVM = 'astar-zkevm',
+  ZKYOTO = 'astar-zktoto',
 }
 
 export enum NativeCurrencyName {
@@ -275,6 +278,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.ZKATANA;
     case 3776:
       return ChainName.ZKEVM;
+    case 6038361:
+      return ChainName.ZKYOTO;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -469,6 +474,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
   [ChainId.ZKEVM]: new Token(
     ChainId.ZKEVM,
     '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.ZKYOTO]: new Token(
+    ChainId.ZKYOTO,
+    '0x2fbc5Ba5927e9dd59C395C1d29235B2fd5f75071',
     18,
     'WETH',
     'Wrapped Ether'

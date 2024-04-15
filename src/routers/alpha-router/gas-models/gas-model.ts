@@ -47,6 +47,7 @@ import {
   USDC_WORMHOLE_CELO,
   USDC_ZKATANA,
   USDC_ZKEVM,
+  USDC_ZKYOTO,
   USDT_ARBITRUM,
   USDT_BNB,
   USDT_GOERLI,
@@ -118,6 +119,7 @@ export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
   [ChainId.BASE]: [USDC_BASE, USDC_NATIVE_BASE],
   [ChainId.ZKATANA]: [USDC_ZKATANA],
   [ChainId.ZKEVM]: [USDC_ZKEVM],
+  [ChainId.ZKYOTO]: [USDC_ZKYOTO],
 };
 
 export type L1ToL2GasCosts = {

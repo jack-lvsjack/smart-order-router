@@ -41,6 +41,7 @@ export const V3_CORE_FACTORY_ADDRESSES: AddressMap = {
   [ChainId.ZKATANA]:
     CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].v3CoreFactoryAddress,
   [ChainId.ZKEVM]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].v3CoreFactoryAddress,
+  [ChainId.ZKYOTO]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKYOTO].v3CoreFactoryAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
@@ -65,6 +66,7 @@ export const QUOTER_V2_ADDRESSES: AddressMap = {
   // [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].quoterAddress,
   [ChainId.ZKATANA]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].quoterAddress,
   [ChainId.ZKEVM]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].quoterAddress,
+  [ChainId.ZKYOTO]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKYOTO].quoterAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
@@ -97,12 +99,16 @@ export const UNISWAP_MULTICALL_ADDRESSES: AddressMap = {
   // [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].multicallAddress,
   [ChainId.ZKATANA]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].multicallAddress,
   [ChainId.ZKEVM]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].multicallAddress,
+  [ChainId.ZKYOTO]: CHAIN_TO_ADDRESSES_MAP[ChainId.ZKYOTO].multicallAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
 export const SWAP_ROUTER_02_ADDRESSES = (chainId: number): string => {
   if (chainId == ChainId.ZKATANA) {
     return CHAIN_TO_ADDRESSES_MAP[ChainId.ZKATANA].swapRouter02Address!;
+  }
+  if (chainId == ChainId.ZKYOTO) {
+    return CHAIN_TO_ADDRESSES_MAP[ChainId.ZKYOTO].swapRouter02Address!;
   }
   if (chainId == ChainId.ZKEVM) {
     return CHAIN_TO_ADDRESSES_MAP[ChainId.ZKEVM].swapRouter02Address!;
@@ -122,7 +128,7 @@ export const ARB_GASINFO_ADDRESS = '0x000000000000000000000000000000000000006C';
 //   CHAIN_TO_ADDRESSES_MAP[ChainId.MAINNET].nonfungiblePositionManagerAddress;
 // export const V3_MIGRATOR_ADDRESS =
 //   CHAIN_TO_ADDRESSES_MAP[ChainId.MAINNET].v3MigratorAddress;
-export const MULTICALL2_ADDRESS = '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696';
+// export const MULTICALL2_ADDRESS = '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696';
 
 export type AddressMap = { [chainId: number]: string | undefined };
 
@@ -240,6 +246,13 @@ export const WETH9: {
   [ChainId.ZKEVM]: new Token(
     ChainId.ZKEVM,
     '0xE9CC37904875B459Fa5D0FE37680d36F1ED55e38',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.ZKYOTO]: new Token(
+    ChainId.ZKYOTO,
+    '0x2fbc5Ba5927e9dd59C395C1d29235B2fd5f75071',
     18,
     'WETH',
     'Wrapped Ether'
