@@ -211,6 +211,11 @@ export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
     'ETHER',
     '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
   ],
+  [ChainId.ZKEVM]: [
+    'ETH',
+    'ETHER',
+    '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+  ],
 };
 
 export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
@@ -323,6 +328,8 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_AVALANCHE!;
     case ChainId.BASE:
       return process.env.JSON_RPC_PROVIDER_BASE!;
+    case ChainId.ZKEVM:
+      return process.env.JSON_RPC_PROVIDER_ZKEVM!;
     default:
       throw new Error(`Chain id: ${id} not supported`);
   }

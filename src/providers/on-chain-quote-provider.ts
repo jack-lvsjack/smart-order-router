@@ -738,6 +738,7 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
               approxGasUsedPerSuccessCall: 0,
             };
           }
+          // console.log(reasonForFailureStr);
           throw new Error(
             `Failed to get ${failedQuoteStates.length} quotes. Reasons: ${reasonForFailureStr}`
           );

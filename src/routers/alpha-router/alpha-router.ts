@@ -634,6 +634,27 @@ export class AlphaRouter
             }
           );
           break;
+        case ChainId.ZKEVM:
+          this.onChainQuoteProvider = new OnChainQuoteProvider(
+            chainId,
+            provider,
+            this.multicall2Provider,
+            {
+              retries: 2,
+              minTimeout: 800,
+              maxTimeout: 2000,
+            },
+            {
+              multicallChunk: 6,
+              gasLimitPerCall: 5_000_000,
+              quoteMinSuccessRate: 0.5,
+            },
+            {
+              gasLimitOverride: 6_250_000,
+              multicallChunk: 10,
+            }
+          );
+          break;
         default:
           this.onChainQuoteProvider = new OnChainQuoteProvider(
             chainId,
