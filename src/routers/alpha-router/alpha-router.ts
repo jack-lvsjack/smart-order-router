@@ -100,6 +100,10 @@ import {
   buildTrade,
 } from '../../util/methodParameters';
 import { metric, MetricLoggerUnit } from '../../util/metric';
+import {
+  DEFAULT_BLOCK_NUMBER_CONFIGS,
+  DEFAULT_RETRY_OPTIONS,
+} from '../../util/onchainQuoteProviderConfigs';
 import { UNSUPPORTED_TOKENS } from '../../util/unsupported-tokens';
 import {
   IRouter,
@@ -639,20 +643,21 @@ export class AlphaRouter
             chainId,
             provider,
             this.multicall2Provider,
+            DEFAULT_RETRY_OPTIONS,
             {
-              retries: 2,
-              minTimeout: 800,
-              maxTimeout: 2000,
-            },
-            {
-              multicallChunk: 6,
-              gasLimitPerCall: 5_000_000,
-              quoteMinSuccessRate: 0.5,
-            },
-            {
-              gasLimitOverride: 6_250_000,
               multicallChunk: 10,
-            }
+              gasLimitPerCall: 12_000_000,
+              quoteMinSuccessRate: 0.15,
+            },
+            {
+              gasLimitOverride: 30_000_000,
+              multicallChunk: 6,
+            },
+            {
+              gasLimitOverride: 30_000_000,
+              multicallChunk: 6,
+            },
+            DEFAULT_BLOCK_NUMBER_CONFIGS
           );
           break;
         default:
