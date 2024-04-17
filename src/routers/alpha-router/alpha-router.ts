@@ -24,7 +24,6 @@ import {
   CachingV2PoolProvider,
   CachingV2SubgraphProvider,
   CachingV3PoolProvider,
-  CachingV3SubgraphProvider,
   EIP1559GasPriceProvider,
   ETHGasStationInfoProvider,
   IOnChainQuoteProvider,
@@ -39,7 +38,6 @@ import {
   OnChainQuoteProvider,
   Simulator,
   StaticV2SubgraphProvider,
-  StaticV3SubgraphProvider,
   SwapRouterProvider,
   TokenPropertiesProvider,
   UniswapMulticallProvider,
@@ -81,7 +79,10 @@ import {
   IV3PoolProvider,
   V3PoolProvider,
 } from '../../providers/v3/pool-provider';
-import { IV3SubgraphProvider } from '../../providers/v3/subgraph-provider';
+import {
+  IV3SubgraphProvider,
+  V3SubgraphProvider,
+} from '../../providers/v3/subgraph-provider';
 import { Erc20__factory } from '../../types/other/factories/Erc20__factory';
 import { SWAP_ROUTER_02_ADDRESSES, WRAPPED_NATIVE_CURRENCY } from '../../util';
 import { CurrencyAmount } from '../../util/amounts';
@@ -644,18 +645,21 @@ export class AlphaRouter
             provider,
             this.multicall2Provider,
             DEFAULT_RETRY_OPTIONS,
+            // DEFAULT_BATCH_PARAMS,
             {
-              multicallChunk: 10,
-              gasLimitPerCall: 12_000_000,
-              quoteMinSuccessRate: 0.15,
+              multicallChunk: 3,
+              gasLimitPerCall: 1_000_000,
+              quoteMinSuccessRate: 0.1,
             },
+            // DEFAULT_GAS_ERROR_FAILURE_OVERRIDES,
             {
-              gasLimitOverride: 30_000_000,
-              multicallChunk: 6,
+              gasLimitOverride: 900_000_000,
+              multicallChunk: 2,
             },
+            // DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES,
             {
-              gasLimitOverride: 30_000_000,
-              multicallChunk: 6,
+              gasLimitOverride: 900_000_000,
+              multicallChunk: 2,
             },
             DEFAULT_BLOCK_NUMBER_CONFIGS
           );
@@ -758,21 +762,40 @@ export class AlphaRouter
       ]);
     }
 
+    // if (v3SubgraphProvider) {
+    //   this.v3SubgraphProvider = v3SubgraphProvider;
+    // } else {
+    //   this.v3SubgraphProvider = new V3SubgraphProviderWithFallBacks([
+    //     new CachingV3SubgraphProvider(
+    //       chainId,
+    //       new URISubgraphProvider(
+    //         chainId,
+    //         `https://cloudflare-ipfs.com/ipns/api.uniswap.org/v1/pools/v3/${chainName}.json`,
+    //         undefined,
+    //         0
+    //       ),
+    //       new NodeJSCache(new NodeCache({ stdTTL: 300, useClones: false }))
+    //     ),
+    //     new StaticV3SubgraphProvider(chainId, this.v3PoolProvider),
+    //   ]);
+    // }
+
     if (v3SubgraphProvider) {
       this.v3SubgraphProvider = v3SubgraphProvider;
     } else {
       this.v3SubgraphProvider = new V3SubgraphProviderWithFallBacks([
-        new CachingV3SubgraphProvider(
-          chainId,
-          new URISubgraphProvider(
-            chainId,
-            `https://cloudflare-ipfs.com/ipns/api.uniswap.org/v1/pools/v3/${chainName}.json`,
-            undefined,
-            0
-          ),
-          new NodeJSCache(new NodeCache({ stdTTL: 300, useClones: false }))
-        ),
-        new StaticV3SubgraphProvider(chainId, this.v3PoolProvider),
+        new V3SubgraphProvider(chainId),
+        // new CachingV3SubgraphProvider(
+        //   chainId,
+        //   new URISubgraphProvider(
+        //     chainId,
+        //     `https://cloudflare-ipfs.com/ipns/api.uniswap.org/v1/pools/v3/${chainName}.json`,
+        //     undefined,
+        //     0
+        //   ),
+        //   new NodeJSCache(new NodeCache({ stdTTL: 300, useClones: false }))
+        // ),
+        // new StaticV3SubgraphProvider(chainId, this.v3PoolProvider),
       ]);
     }
 
