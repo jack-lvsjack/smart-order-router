@@ -91,6 +91,7 @@ import {
   ID_TO_NETWORK_NAME,
   V2_SUPPORTED,
 } from '../../util/chains';
+import { LOW_TVL_THRESHOLD, LOW_TVL_TOKEN_CHECK_LIST } from '../../util/config';
 import {
   getHighestLiquidityV3NativePool,
   getHighestLiquidityV3USDPool,
@@ -1979,6 +1980,34 @@ export class AlphaRouter
 
     const getQuotesResults = await Promise.all(quotePromises);
 
+    // !!! WARNING: this is temporary fix for Wrong price from low TVL pool
+    const selections = getQuotesResults[0]?.candidatePools?.selections || [];
+    const checkTVLtokenList: string[] = LOW_TVL_TOKEN_CHECK_LIST.map((token) =>
+      token.toLowerCase()
+    );
+    const lowTVLPoolIDs: string[] = [];
+    (Object.values(selections) as any).forEach((pools: any[]) => {
+      pools.forEach((pool: any) => {
+        const token0Id = pool.token0.id.toLowerCase();
+        const token1Id = pool.token1.id.toLowerCase();
+        if (
+          checkTVLtokenList.includes(token0Id) ||
+          checkTVLtokenList.includes(token1Id)
+        ) {
+          if (pool.tvlUSD < LOW_TVL_THRESHOLD) {
+            lowTVLPoolIDs.push(pool.id.toLowerCase());
+          }
+        }
+      });
+    });
+    const routersWithOutLowTVL =
+      getQuotesResults[0]?.routesWithValidQuotes.filter(
+        (quote: any) =>
+          !quote.poolAddresses.some((element: string) =>
+            lowTVLPoolIDs.includes(element.toLowerCase())
+          )
+      ) || [];
+
     const allRoutesWithValidQuotes: RouteWithValidQuote[] = [];
     const allCandidatePools: CandidatePoolsBySelectionCriteria[] = [];
     getQuotesResults.forEach((getQuoteResult) => {
@@ -1987,8 +2016,9 @@ export class AlphaRouter
         allCandidatePools.push(getQuoteResult.candidatePools);
       }
     });
+    // !!! WARNING: code above is temporary fix for Wrong price from low TVL pool
 
-    if (allRoutesWithValidQuotes.length === 0) {
+    if (routersWithOutLowTVL.length === 0) {
       log.info({ allRoutesWithValidQuotes }, 'Received no valid quotes');
       return null;
     }
@@ -1997,7 +2027,7 @@ export class AlphaRouter
     const bestSwapRoute = await getBestSwapRoute(
       amount,
       percents,
-      allRoutesWithValidQuotes,
+      routersWithOutLowTVL,
       tradeType,
       this.chainId,
       routingConfig,
