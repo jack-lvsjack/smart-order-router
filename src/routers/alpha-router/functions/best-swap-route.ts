@@ -216,6 +216,13 @@ export async function getBestSwapRouteBy(
     bestQuote = by(percentToSortedQuotes[100][0]!);
     bestSwap = [percentToSortedQuotes[100][0]!];
 
+    // !!! TODO WARNING: this is temporary fix for Wrong ASTR price filter out 0x8493Ec659932D04701534E3412118C1a09368a13
+    const filteredPercentToSortedQuotes = percentToSortedQuotes[100].filter(
+      (q) =>
+        !q.poolAddresses.includes('0x8493Ec659932D04701534E3412118C1a09368a13')
+    );
+    bestSwap = [filteredPercentToSortedQuotes[0]!];
+
     for (const routeWithQuote of percentToSortedQuotes[100].slice(0, 5)) {
       bestSwapsPerSplit.push({
         quote: by(routeWithQuote),
