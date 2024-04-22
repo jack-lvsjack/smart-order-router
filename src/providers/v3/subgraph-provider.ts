@@ -69,6 +69,7 @@ const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
     'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest',
   // [ChainId.ZKATANA]: 'https://graph.l2x.pro/subgraphs/name/zkevm/uniswap-v3',
   [ChainId.ZKEVM]: 'https://graph.l2x.pro/subgraphs/name/zkevm/uniswap-v3',
+  [ChainId.ZKYOTO]: 'https://graph.l2x.pro/subgraphs/name/L2X/zkyoto',
 };
 
 const PAGE_SIZE = 1000; // 1k is max possible query size from subgraph.
