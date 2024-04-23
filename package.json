@@ -1,13 +1,13 @@
 {
-  "name": "@lvsjack/smart-order-router",
-  "version": "3.24.43",
+  "name": "@AstridTechnologies/smart-order-router",
+  "version": "3.24.44",
   "description": "Uniswap Smart Order Router",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jack-lvsjack/smart-order-router.git"
+    "url": "https://github.com/AstridTechnologies/l2x-pro-smart-order-router-SDK.git"
   },
   "license": "GPL",
   "keywords": [],
@@ -117,8 +117,5 @@
   },
   "oclif": {
     "commands": "./cli/commands"
-  },
-  "publishConfig": {
-  "@YOUR-USERNAME:registry": "https://npm.pkg.github.com"
-}
+  }
 }
