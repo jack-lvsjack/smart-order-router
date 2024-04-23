@@ -117,5 +117,8 @@
   },
   "oclif": {
     "commands": "./cli/commands"
-  }
+  },
+  "publishConfig": {
+  "@YOUR-USERNAME:registry": "https://npm.pkg.github.com"
+}
 }
