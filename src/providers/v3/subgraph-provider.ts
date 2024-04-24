@@ -68,7 +68,8 @@ const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
   [ChainId.BASE]:
     'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest',
   // [ChainId.ZKATANA]: 'https://graph.l2x.pro/subgraphs/name/zkevm/uniswap-v3',
-  [ChainId.ZKEVM]: 'https://graph.l2x.pro/subgraphs/name/zkevm/uniswap-v3',
+  // [ChainId.ZKEVM]: 'https://graph.l2x.pro/subgraphs/name/zkevm/uniswap-v3',
+  [ChainId.ZKEVM]: 'https://graph.l2x.pro/subgraphs/name/zkevm/unitest',
   [ChainId.ZKYOTO]: 'https://graph.l2x.pro/subgraphs/name/L2X/zkyoto',
 };
 
